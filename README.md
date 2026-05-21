@@ -186,12 +186,12 @@ Validation checks passed through v4:
 Run scripts in this order:
 
 ```bash
-python3 extract_k00_k14.py
-python3 build_master_table_v1.py
-python3 rename_master_table_columns.py
-python3 build_master_table_v2_who_english.py
-python3 build_master_table_v3_semantic_en.py
-python3 build_master_table_v4_QA.py
+python3 scripts/extract_k00_k14.py
+python3 scripts/build_master_table_v1.py
+python3 scripts/rename_master_table_columns.py
+python3 scripts/build_master_table_v2_who_english.py
+python3 scripts/build_master_table_v3_semantic_en.py
+python3 scripts/build_master_table_v4_QA.py
 ```
 
 Notes:
