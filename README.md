@@ -42,10 +42,14 @@ The lookup app is a single-page HTML/CSS/JavaScript project that can run on GitH
 
 Each result shows the China diagnosis code, Chinese diagnosis name, semantic English diagnosis name, WHO ICD code, WHO English name, mapping confidence, and mapping type. Rows can be expanded to inspect hierarchy and source details.
 
-Expected GitHub Pages path:
+Live GitHub Pages URL:
+
+- [https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/](https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/)
+
+General GitHub Pages path pattern:
 
 ```text
-[[https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/](https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/)]
+https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/
 ```
 
 ## Repository Layout
@@ -259,13 +263,17 @@ WHO ICD-10 English terms are based on the official WHO ICD-10 2019 browser:
 
 The China diagnosis codes and Chinese diagnosis names are derived from the `ICD-10医保2.0版` PDF source.
 
-Original Chinese ICD-10 Source
+### Original Chinese ICD-10 Source
+
 This repository does not redistribute the original `ICD-10医保2.0版.pdf` source file.
+
 The China diagnosis codes and Chinese diagnosis names were derived from the public `ICD-10医保2.0版` source available through the official 国家医保信息业务编码标准数据库动态维护 platform.
-To reproduce the extraction step, obtain the PDF from the official source, place it in the project root as:
+
+To reproduce the extraction step, obtain the PDF from the official source, then place it in the project root as:
 
 ```text
 ICD-10医保2.0版.pdf
+```
 
 ## Limitations
 
