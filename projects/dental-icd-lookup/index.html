@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>K00-K14 Dental ICD Lookup / 口腔 ICD-10 双语诊断编码查询</title>
+    <meta
+      name="description"
+      content="Static bilingual K00-K14 dental ICD-10 diagnosis code lookup built from a Chinese-English semantic master table."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">K00-K14 Dental ICD Lookup</p>
+          <h1>口腔 ICD-10 双语诊断编码查询</h1>
+        </div>
+        <div class="dataset-status" id="datasetStatus">Loading dataset...</div>
+      </header>
+
+      <section class="toolbar" aria-label="Search controls">
+        <label class="search-field">
+          <span>Search</span>
+          <input
+            id="searchInput"
+            type="search"
+            autocomplete="off"
+            placeholder="K02, K02.0, 龋, 牙髓炎, caries, pulpitis"
+          />
+        </label>
+        <label>
+          <span>Confidence</span>
+          <select id="confidenceFilter">
+            <option value="">All</option>
+            <option value="HIGH">HIGH</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="LOW">LOW</option>
+          </select>
+        </label>
+        <label>
+          <span>Mapping type</span>
+          <select id="typeFilter">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label class="toggle">
+          <input id="subtypeOnly" type="checkbox" />
+          <span>Subtypes only</span>
+        </label>
+        <button id="clearButton" type="button">Clear</button>
+      </section>
+
+      <section class="summary-row" aria-live="polite">
+        <div>
+          <strong id="resultCount">0</strong>
+          <span id="resultLabel">records</span>
+        </div>
+        <div id="activeQuery">Ready</div>
+      </section>
+
+      <section class="table-wrap" aria-label="Search results">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">China diagnosis code</th>
+              <th scope="col">Chinese diagnosis name</th>
+              <th scope="col">English semantic diagnosis name</th>
+              <th scope="col">WHO ICD code</th>
+              <th scope="col">WHO English name</th>
+              <th scope="col">Confidence</th>
+              <th scope="col">Mapping type</th>
+              <th scope="col">Details</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr>
+              <td colspan="8" class="empty-state">Loading dataset...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
