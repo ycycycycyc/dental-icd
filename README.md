@@ -45,8 +45,9 @@ Each result shows the China diagnosis code, Chinese diagnosis name, semantic Eng
 Expected GitHub Pages path:
 
 ```text
-[https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/](https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/)
+[https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/]
 ```
+[https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/]
 
 ## Repository Layout
 
