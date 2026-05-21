@@ -1,105 +1,99 @@
-# K00-K14 ICD-10 Chinese-English Master Table
+# Dental ICD-10 K00-K14 Chinese-English Master Table
 
-This repository builds a structured master table for ICD-10 `K00-K14` diagnoses from the Chinese `ICD-10医保2.0版` source, then adds WHO ICD-10 English mappings, semantic English diagnosis names, and QA review flags.
+This repository contains a structured Chinese-English master table for ICD-10 `K00-K14`, covering diseases of the oral cavity, salivary glands, jaws, teeth, gingiva, tongue, and related oral structures.
 
-The current recommended working outputs are:
+The project starts from the Chinese `ICD-10医保2.0版` hierarchy, preserves China diagnosis codes and local subtype codes, maps each row to the closest WHO ICD-10 English parent code, and adds a semantic English diagnosis name for lookup and review.
 
-- `K00-K14_master_table_v3_semantic_en.tsv`
-- `K00-K14_master_table_v3_semantic_en.xlsx`
-- `K00-K14_master_table_v4_QA.tsv`
-- `K00-K14_master_table_v4_QA.xlsx`
+## Main Outputs
 
-## Side Project
+| File | Description |
+|---|---|
+| `K00-K14_master_table_v3_semantic_en.tsv` | Current semantic English master table |
+| `K00-K14_master_table_v3_semantic_en.xlsx` | Excel version of the semantic master table |
+| `K00-K14_master_table_v4_QA.tsv` | QA review layer with review flags |
+| `K00-K14_master_table_v4_QA.xlsx` | Excel version of the QA review layer |
+| `K00-K14_v3_semantic_master_summary_and_data_dictionary.md` | Data dictionary and project summary |
+| `K00-K14_v4_QA_review_instructions.md` | Manual review guide for QA rows |
+
+## What This Data Is For
+
+This table is designed for:
+
+- bilingual dental ICD lookup
+- structured terminology review
+- mapping China ICD-10 local diagnosis codes to closest WHO ICD-10 parent codes
+- building search tools for Chinese and English oral diagnosis terms
+- preparing a manually reviewed semantic terminology layer
+
+It is not a treatment, billing, reimbursement, or clinical decision-support table.
+
+## Side Project: Dental ICD Lookup
+
+This repository also includes a small static lookup app:
 
 - [K00-K14 Dental ICD Lookup / 口腔 ICD-10 双语诊断编码查询](projects/dental-icd-lookup/)
 
-This static GitHub Pages-ready lookup page lets users search the K00-K14 semantic table by China diagnosis code, Chinese term, English semantic diagnosis term, WHO ICD code, and WHO English parent term.
+The lookup app is a single-page HTML/CSS/JavaScript project that can run on GitHub Pages. It loads the v3 semantic table and supports search by:
 
-## What To Upload To GitHub
+- partial China diagnosis code, such as `K02` or `K02.0`
+- Chinese diagnosis terms, such as `龋` or `牙髓炎`
+- English terms, such as `caries` or `pulpitis`
+- WHO ICD code and WHO English parent term
 
-### Recommended First Upload
+Each result shows the China diagnosis code, Chinese diagnosis name, semantic English diagnosis name, WHO ICD code, WHO English name, mapping confidence, and mapping type. Rows can be expanded to inspect hierarchy and source details.
 
-Upload these first. They are enough for someone to understand and use the current work.
+Expected GitHub Pages path:
 
-| File | Purpose |
-|---|---|
-| `README.md` | Project overview and file guide |
-| `K00-K14_master_table_v3_semantic_en.tsv` | Frozen semantic English master table |
-| `K00-K14_master_table_v3_semantic_en.xlsx` | Excel version of v3 |
-| `K00-K14_master_table_v4_QA.tsv` | QA review layer |
-| `K00-K14_master_table_v4_QA.xlsx` | Excel version of QA layer |
-| `K00-K14_v3_semantic_master_summary_and_data_dictionary.md` | Summary and v3 column dictionary |
-| `K00-K14_v4_QA_review_instructions.md` | Manual QA review instructions |
+```text
+https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/
+```
 
-### Recommended Script Upload
+## Repository Layout
 
-Upload these with the first batch if you want the work to be reproducible.
+```text
+.
+├── README.md
+├── K00-K14_master_table_v3_semantic_en.tsv
+├── K00-K14_master_table_v3_semantic_en.xlsx
+├── K00-K14_master_table_v4_QA.tsv
+├── K00-K14_master_table_v4_QA.xlsx
+├── K00-K14_v3_semantic_master_summary_and_data_dictionary.md
+├── K00-K14_v4_QA_review_instructions.md
+├── scripts/
+│   ├── README.md
+│   ├── extract_k00_k14.py
+│   ├── build_master_table_v1.py
+│   ├── rename_master_table_columns.py
+│   ├── build_master_table_v2_who_english.py
+│   ├── build_master_table_v3_semantic_en.py
+│   └── build_master_table_v4_QA.py
+└── projects/
+    └── dental-icd-lookup/
+        ├── index.html
+        ├── styles.css
+        ├── app.js
+        └── data/
+            └── K00-K14_master_table_v3_semantic_en.tsv
+```
 
-| File | Purpose |
-|---|---|
-| `extract_k00_k14.py` | Extracts the raw K00-K14 hierarchy from the PDF |
-| `build_master_table_v1.py` | Builds cleaned Chinese hierarchy master table |
-| `rename_master_table_columns.py` | Renames Chinese headers to English snake_case |
-| `build_master_table_v2_who_english.py` | Adds WHO ICD-10 English parent mappings |
-| `build_master_table_v3_semantic_en.py` | Adds semantic English diagnosis layer |
-| `build_master_table_v4_QA.py` | Adds QA status/reason/priority layer |
-
-### Optional Audit Trail Upload
-
-Upload these if you want reviewers to inspect every intermediate layer.
-
-| File | Purpose |
-|---|---|
-| `k00_k14_full_hierarchy.tsv` | Raw official hierarchy extraction |
-| `k00_k14_full_hierarchy.xlsx` | Excel version of raw hierarchy extraction |
-| `K00-K14_master_table_v1.tsv` | Cleaned Chinese hierarchy master table |
-| `K00-K14_master_table_v1.xlsx` | Excel version of v1 |
-| `K00-K14_master_table_v1_english_columns.tsv` | v1 with English snake_case headers |
-| `K00-K14_master_table_v1_english_columns.xlsx` | Excel version of English-header v1 |
-| `K00-K14_master_table_v2.tsv` | WHO English parent mapping layer |
-| `K00-K14_master_table_v2.xlsx` | Excel version of v2 |
-
-### Do Not Upload By Default
-
-These should usually stay out of GitHub.
-
-| File | Reason |
-|---|---|
-| `ICD-10医保2.0版.pdf` | Original source PDF; upload only if redistribution is permitted |
-| `k00_k14.tsv` | Old two-column extraction, superseded by full hierarchy files |
-| `__pycache__/` | Python cache |
-| `~$*.xlsx` | Temporary Excel lock files |
-
-## Current Data Layers
+## Data Layers
 
 ### Raw hierarchy extraction
 
-Files:
+The raw extraction preserves the original Chinese hierarchy:
 
-- `k00_k14_full_hierarchy.tsv`
-- `k00_k14_full_hierarchy.xlsx`
+- chapter
+- section
+- category
+- subcategory
+- diagnosis code
+- diagnosis name
 
-Columns:
+It keeps subtype codes such as `K00.100x001` and does not collapse them into parent rows.
 
-- `章`
-- `节`
-- `类目代码`
-- `类目名称`
-- `亚目代码`
-- `亚目名称`
-- `诊断代码`
-- `诊断名称`
+### v1 cleaned hierarchy
 
-This layer preserves the official Chinese hierarchy from the PDF.
-
-### v1 cleaned master table
-
-Files:
-
-- `K00-K14_master_table_v1.tsv`
-- `K00-K14_master_table_v1.xlsx`
-
-Adds:
+The v1 layer adds structural fields:
 
 - `chapter_code`
 - `parent_code`
@@ -107,39 +101,20 @@ Adds:
 - `subtype_number`
 - `code_level`
 
-### English-column v1
+### v2 WHO English mapping
 
-Files:
-
-- `K00-K14_master_table_v1_english_columns.tsv`
-- `K00-K14_master_table_v1_english_columns.xlsx`
-
-Renames columns to English snake_case. Chinese diagnosis text remains unchanged.
-
-### v2 WHO English mapping layer
-
-Files:
-
-- `K00-K14_master_table_v2.tsv`
-- `K00-K14_master_table_v2.xlsx`
-
-Adds:
+The v2 layer adds official WHO ICD-10 English labels where available:
 
 - `diagnosis_name_en`
 - `category_name_en`
 - `subcategory_name_en`
 - `english_mapping_confidence`
 
-This layer maps category and subcategory names to official WHO ICD-10 English terms where possible. Local China-specific rows inherit the closest WHO parent term.
+This layer is intentionally structural. Local China-specific diagnosis rows inherit the closest WHO ICD-10 parent term.
 
 ### v3 semantic English master table
 
-Files:
-
-- `K00-K14_master_table_v3_semantic_en.tsv`
-- `K00-K14_master_table_v3_semantic_en.xlsx`
-
-Adds:
+The v3 layer is the current master table. It adds:
 
 - `who_icd_code`
 - `who_name_en`
@@ -148,42 +123,92 @@ Adds:
 - `english_mapping_type`
 - `semantic_source`
 
-This is the current semantic English master table.
+`semantic_name_en` is the best current English clinical label for the row. It may be an official WHO ICD-10 term, a standard dental term, or a conservative clinical translation.
 
-### v4 QA review layer
+Examples:
 
-Files:
+| diagnosis_code | diagnosis_name_cn | who_icd_code | structural_name_en | semantic_name_en |
+|---|---|---|---|---|
+| `K00.000x003` | 少牙畸形 | `K00.0` | Anodontia | Oligodontia |
+| `K00.000x004` | 先天缺牙 | `K00.0` | Anodontia | Congenital absence of teeth |
+| `K04.007` | 不可逆性牙髓炎 | `K04.0` | Pulpitis | Irreversible pulpitis |
+| `K14.800x010` | 舌牙痕 | `K14.8` | Other diseases of tongue | Scalloped tongue |
 
-- `K00-K14_master_table_v4_QA.tsv`
-- `K00-K14_master_table_v4_QA.xlsx`
+### v4 QA layer
 
-Adds:
+The v4 layer appends manual review fields:
 
 - `qa_status`
 - `qa_reason`
 - `qa_priority`
 
-This layer flags rows that need manual review. It does not change v3 content.
+Rows marked `NEEDS_REVIEW` should be reviewed before treating the semantic English term as final.
 
-## Validation Summary
+## Key Concepts
 
-Current row count:
+### China diagnosis code
+
+`diagnosis_code` is the China ICD diagnosis code from the source hierarchy.
+
+Examples:
+
+- `K04.000`
+- `K04.007`
+- `K00.100x001`
+
+China-specific local subtype codes are preserved as-is.
+
+### WHO ICD code
+
+`who_icd_code` is the closest official WHO ICD-10 code.
+
+Example:
 
 ```text
-651
+diagnosis_code = K00.100x001
+diagnosis_name_cn = 多生牙
+who_icd_code = K00.1
+who_name_en = Supernumerary teeth
 ```
 
-Validation checks passed through v4:
+The local subtype code is not forced into WHO format.
 
-- no missing `diagnosis_code`
-- no duplicate `diagnosis_code`
-- all rows are within `K00-K14`
-- subtype rows are preserved
-- v3 existing columns remain unchanged in v4
+### Structural vs semantic English
 
-## Rebuild Order
+`structural_name_en` is inherited from the WHO parent mapping.
 
-Run scripts in this order:
+`semantic_name_en` is the clinically refined English diagnosis label.
+
+Example:
+
+```text
+diagnosis_name_cn = 少牙畸形
+structural_name_en = Anodontia
+semantic_name_en = Oligodontia
+```
+
+## Validation
+
+Current validation status:
+
+```text
+Total rows: 651
+Missing diagnosis_code: 0
+Duplicate diagnosis_code: 0
+Rows outside K00-K14: 0
+Subtype rows preserved: yes
+```
+
+v4 QA status:
+
+```text
+PASS: 356
+NEEDS_REVIEW: 295
+```
+
+## Reproducing The Tables
+
+The scripts are designed to run in order:
 
 ```bash
 python3 scripts/extract_k00_k14.py
@@ -194,65 +219,56 @@ python3 scripts/build_master_table_v3_semantic_en.py
 python3 scripts/build_master_table_v4_QA.py
 ```
 
-Notes:
+The raw PDF source is not included in this repository. To reproduce the extraction step, place the source PDF in the project root as:
 
-- `extract_k00_k14.py` requires the source PDF to exist locally as `ICD-10医保2.0版.pdf`.
-- Later scripts build from the previous TSV layer.
-- The scripts write both TSV and XLSX outputs.
+```text
+ICD-10医保2.0版.pdf
+```
 
-## Python Dependencies
+The later scripts can be inspected independently because the mapping logic is encoded in the scripts.
 
-The scripts use:
+## Script Summary
 
-- `pdfplumber` for PDF table extraction
-- `openpyxl` for XLSX output
+| Script | Purpose |
+|---|---|
+| `scripts/extract_k00_k14.py` | Extracts K00-K14 rows from the source PDF while preserving hierarchy |
+| `scripts/build_master_table_v1.py` | Adds structural hierarchy fields such as parent code and subtype flags |
+| `scripts/rename_master_table_columns.py` | Renames Chinese headers to English snake_case |
+| `scripts/build_master_table_v2_who_english.py` | Adds WHO ICD-10 English category/subcategory mappings |
+| `scripts/build_master_table_v3_semantic_en.py` | Adds semantic English diagnosis names |
+| `scripts/build_master_table_v4_QA.py` | Adds QA review flags |
 
-Install if needed:
+## Dependencies
+
+Python packages:
+
+- `pdfplumber`
+- `openpyxl`
+
+Install with:
 
 ```bash
 python3 -m pip install pdfplumber openpyxl
 ```
 
-## WHO ICD-10 English Source
+## Sources
 
-WHO-level English terms are based on the official WHO ICD-10 2019 browser:
+WHO ICD-10 English terms are based on the official WHO ICD-10 2019 browser:
 
 <https://icd.who.int/browse10/2019/en#/K00-K14>
 
-Important distinction:
+The China diagnosis codes and Chinese diagnosis names are derived from the `ICD-10医保2.0版` PDF source.
 
-- `diagnosis_code` is the China diagnosis code from the source PDF.
-- `who_icd_code` is the closest official WHO ICD-10 code.
-- China-specific local subtype codes such as `K00.100x001` are not treated as official WHO ICD-10 codes.
+## Limitations
 
-## Manual QA
+- The source PDF is not included.
+- China-specific local subtype codes are not official WHO ICD-10 codes.
+- Some semantic English names are conservative clinical translations and require manual review.
+- Rows marked `NEEDS_REVIEW` in v4 should not be treated as fully QA-approved.
 
-Use:
+## Recommended Next Work
 
-- `K00-K14_master_table_v4_QA.xlsx`
-- `K00-K14_v4_QA_review_instructions.md`
-
-Start with:
-
-```text
-qa_status = NEEDS_REVIEW
-english_mapping_type = LOCAL_SUBTYPE_TRANSLATION
-```
-
-These are China-specific local subtype rows and are the most important manual review group.
-
-## Suggested Repository Structure Later
-
-The current flat folder is acceptable for the first GitHub upload. Later, the project can be reorganized as:
-
-```text
-data/
-  raw/
-  intermediate/
-  final/
-docs/
-scripts/
-README.md
-```
-
-For now, keeping the files flat is simpler and less risky.
+- Review all `NEEDS_REVIEW` rows in `K00-K14_master_table_v4_QA.xlsx`.
+- Move confirmed rows from `NEEDS_REVIEW` to `PASS` after terminology review.
+- Add a changelog for manual terminology corrections.
+- Publish the lookup app with GitHub Pages and update the README link with the live URL.
