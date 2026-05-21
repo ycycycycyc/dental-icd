@@ -45,9 +45,8 @@ Each result shows the China diagnosis code, Chinese diagnosis name, semantic Eng
 Expected GitHub Pages path:
 
 ```text
-[https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/]
+[[https://<your-username>.github.io/<repo-name>/projects/dental-icd-lookup/](https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/)]
 ```
-[https://ycycycycyc.github.io/dental-icd/projects/dental-icd-lookup/]
 
 ## Repository Layout
 
@@ -259,6 +258,14 @@ WHO ICD-10 English terms are based on the official WHO ICD-10 2019 browser:
 <https://icd.who.int/browse10/2019/en#/K00-K14>
 
 The China diagnosis codes and Chinese diagnosis names are derived from the `ICD-10医保2.0版` PDF source.
+
+Original Chinese ICD-10 Source
+This repository does not redistribute the original `ICD-10医保2.0版.pdf` source file.
+The China diagnosis codes and Chinese diagnosis names were derived from the public `ICD-10医保2.0版` source available through the official 国家医保信息业务编码标准数据库动态维护 platform.
+To reproduce the extraction step, obtain the PDF from the official source, place it in the project root as:
+
+```text
+ICD-10医保2.0版.pdf
 
 ## Limitations
 
